@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - Movie Review</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        html, body { height: 100%; }
+
+        body {
+            margin: 0;
+            background:
+              linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.85)),
+              url("https://assets.nflxext.com/ffe/siteui/vlv3/3f1fbb35-hero-background.jpg");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 900;
+            color: #e50914 !important;
+            letter-spacing: 1px;
+        }
+
+        .navbar a { color: white !important; font-weight: 600; }
+        .navbar a:hover { color: #ffb703 !important; }
+
+        .main-content { flex: 1; }
+
+        .card {
+            background: rgba(0,0,0,0.75);
+            color: white;
+            border: none;
+        }
+
+        footer {
+            background: rgba(0,0,0,.7);
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+@using Microsoft.AspNetCore.Http
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-success px-4">
+    <a class="navbar-brand" href="/">🎬 MOVIE REVIEWS</a>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto align-items-center">
+
+            @* ================= USER LOGGED IN ================= *@
+            @if (Context.Session.GetString("UserID") != null)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Movie/Search">🔍 Search</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Movie/Trending">🔥 Trending</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Review/MyReviews">📊 My Reviews</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Dashboard/Index">📊 My Dashboard</a>
+                </li>
+
+                @* ============== ADMIN ONLY ============== *@
+                @if (Context.Session.GetString("UserRole") == "Admin")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link text-warning fw-bold" href="/Admin/Dashboard">
+                            👑 Admin Dashboard
+                        </a>
+                    </li>
+                }
+
+                <li class="nav-item text-warning fw-bold ms-3">
+                    👋 @Context.Session.GetString("UserName")
+                </li>
+
+                <li class="nav-item ms-3">
+                    <a class="btn btn-danger btn-sm" href="/Account/Logout">Logout</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Account/Login">Login</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Account/Register">Register</a>
+                </li>
+            }
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5 main-content">
+    @RenderBody()
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<footer>
+    &copy; 2026 Movie Review System
+</footer>
+
+</body>
+</html>
+
+

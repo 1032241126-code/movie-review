@@ -1,0 +1,14 @@
+@model List<MovieReviewSystem.Models.OmdbMovieViewModel>
+
+<h2>Movie List</h2>
+
+@foreach (var movie in Model)
+{
+    <div style="border:1px solid #ccc;padding:10px;margin:10px;">
+        <img src="@movie.Poster" width="120" />
+        <h3>@movie.Title (@movie.Year)</h3>
+        <a asp-action="Details" asp-route-id="@movie.imdbID">
+            View Details
+        </a>
+    </div>
+}

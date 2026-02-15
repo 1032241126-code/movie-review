@@ -1,0 +1,75 @@
+@model MovieReviewSystem.Models.User
+@{
+    ViewBag.Title = "Login";
+}
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Background Image + Overlay */
+    .login-bg {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+                    url('https://images.unsplash.com/photo-1612831455540-17e3f3a9e7ee?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .login-card {
+        background: rgba(0,0,0,0.75);
+        padding: 30px;
+        border-radius: 12px;
+        width: 350px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        color: white;
+    }
+
+    .login-card h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .login-card input {
+        margin-bottom: 15px;
+    }
+
+    .login-card a {
+        color: #ffb703;
+        text-decoration: none;
+    }
+
+    .login-card a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="login-bg">
+    <div class="login-card">
+        <h2>🔑 Login</h2>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        <form method="post">
+            <input type="email" name="email" placeholder="Email" class="form-control" required />
+            <input type="password" name="password" placeholder="Password" class="form-control" required />
+            <button class="btn btn-danger w-100 mt-2" type="submit">Login</button>
+        </form>
+
+        <p class="mt-3 text-center">
+            New user? <a href="/Account/Register">Create account</a>
+        </p>
+    </div>
+</div>
+
+
+
+

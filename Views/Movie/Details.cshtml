@@ -1,0 +1,63 @@
+@model MovieReviewSystem.Models.OmdbMovieViewModel
+
+@if (ViewBag.UserCount > 0)
+{
+    <p>
+        ⭐ <b>Average Rating:</b> @ViewBag.AvgRating.ToString("0.0")
+        <br />
+        👥 <b>Total Users:</b> @ViewBag.UserCount
+    </p>
+}
+else
+{
+    <p class="text-muted">No ratings yet</p>
+}
+
+<h2>@Model.Title (@Model.Year)</h2>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <img src="@Model.Poster" class="img-fluid rounded shadow" />
+    </div>
+
+    <div class="col-md-8">
+
+        <p><b>IMDB ID:</b> @Model.imdbID</p>
+
+        <hr />
+
+        <h4>⭐ Add Your Review</h4>
+
+       <form method="post" asp-action="AddReview" asp-controller="Movie">
+
+           <input type="hidden" name="MovieID" value="@Model.imdbID" />
+
+            <div class="mb-3">
+                <label>Rating (1–5)</label>
+                <select name="rating" class="form-select" required>
+                    <option value="">Select</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Comment</label>
+                <textarea name="comment" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <button class="btn btn-success">Submit Review</button>
+
+        </form>
+
+        <br />
+
+        <a href="/Movie/Search">⬅ Back to Search</a>
+
+    </div>
+
+</div>

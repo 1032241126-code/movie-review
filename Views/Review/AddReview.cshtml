@@ -1,0 +1,26 @@
+@model string  
+
+<h2>Give Review</h2>
+
+<form asp-action="AddReview" method="post">
+
+    <input type="hidden" name="MovieId" value="@Model" />
+
+    <label>Rating</label>
+    <select name="rating" class="form-control">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+
+    <label>Comment</label>
+    <textarea name="comment" class="form-control"
+              placeholder="Write review"></textarea>
+
+    <button type="submit" class="btn btn-primary mt-2">
+        Submit
+    </button>
+</form>
+

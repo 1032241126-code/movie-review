@@ -1,0 +1,14 @@
+@model MovieReviewSystem.Models.Review
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id"/>
+
+    <label>Rating</label>
+    <input asp-for="Rating" class="form-control"/>
+
+    <label>Comment</label>
+    <textarea asp-for="Comment" class="form-control"></textarea>
+
+    <button class="btn btn-success mt-2">Update</button>
+</form>

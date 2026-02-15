@@ -1,0 +1,86 @@
+.movie-card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.movie-card img {
+    height: 350px;
+    object-fit: cover;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px); /* Navbar + footer space adjust karta hai */
+    padding: 20px;
+}
+
+.login-card {
+    background: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+}
+
+.login-card .form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.login-card .form-control::placeholder {
+    color: #ccc;
+}
+
+.login-card .form-control:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #e50914;
+    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25);
+    color: white;
+}
+
+.login-card label {
+    color: #ccc;
+    font-weight: 500;
+}
+
+  .form-control {
+    height: 42px;
+    font-size: 14px;
+}
+
+.btn {
+    padding: 10px;
+    font-size: 15px;
+}
+
+.login-bg, .register-bg {
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)),
+                url('/images/login-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.login-card, .register-card {
+    background: rgba(0,0,0,0.75);
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+}
+

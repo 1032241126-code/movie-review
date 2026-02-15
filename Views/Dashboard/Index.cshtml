@@ -1,0 +1,24 @@
+@{
+    ViewBag.Title = "My Dashboard";
+}
+
+<h2 class="text-info fw-bold mb-4">📊 My Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="card bg-dark text-warning text-center p-4">
+            <h5>📝 My Reviews</h5>
+            <h2>@ViewBag.TotalReviews</h2>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card bg-dark text-success text-center p-4">
+            <h5>⭐ Avg Rating</h5>
+            <h2>@ViewBag.AvgRating.ToString("0.0")</h2>
+        </div>
+    </div>
+
+</div>
+

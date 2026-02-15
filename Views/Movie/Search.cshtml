@@ -1,0 +1,99 @@
+@{
+    ViewBag.Title = "Search Movies";
+}
+
+<!-- ================= SEARCH FORM ================= -->
+<div class="card p-3 mb-4 bg-dark text-white">
+    <form method="post" class="row g-2 align-items-center">
+        <div class="col-md-6">
+            <input name="movieName" class="form-control" placeholder="Search movie..." />
+        </div>
+
+        <div class="col-md-4">
+            <select name="language" class="form-select">
+                <option value="">All Languages</option>
+                <option value="hindi">Hindi</option>
+                <option value="telugu">Telugu</option>
+                <option value="english">English</option>
+                <option value="tamil">Tamil</option>
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+</div>
+
+<!-- ================= SEARCH RESULT ================= -->
+@if (ViewBag.SearchResult != null && ViewBag.SearchResult.Count > 0)
+{
+    <div class="card p-3 mb-4 bg-dark text-white">
+        <h5>🔍 Search Result</h5>
+
+        <div class="row row-cols-2 row-cols-md-4 g-4">
+            @foreach (var m in ViewBag.SearchResult)
+            {
+                if (m.Poster == "N/A") { continue; }
+
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <img src="@m.Poster"
+                             class="card-img-top"
+                             style="height:300px; object-fit:cover;" />
+
+                        <div class="card-body d-flex flex-column">
+                            <small class="mb-2">@m.Title</small>
+
+                            <a href="/Movie/Details?imdbId=@m.imdbID"
+                               class="btn btn-warning btn-sm mt-auto">
+                                View Reviews
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<!-- ================= DEFAULT MOVIE SECTIONS ================= -->
+@foreach (var group in new[]
+{
+    new { Title = "🇮🇳 Bollywood", Movies = ViewBag.Bollywood, Color = "danger" },
+    new { Title = "🇮🇳 Tollywood", Movies = ViewBag.Tollywood, Color = "success" },
+    new { Title = "🌍 Hollywood", Movies = ViewBag.Hollywood, Color = "primary" }
+})
+{
+    <div class="card p-3 mb-4 bg-@group.Color text-white">
+        <h5>@group.Title</h5>
+
+        <div class="row row-cols-2 row-cols-md-4 g-4">
+            @foreach (var m in group.Movies)
+            {
+                if (m.Poster == "N/A") { continue; }
+
+                <div class="col">
+                    <div class="card h-100 text-center">
+                        <img src="@m.Poster"
+                             class="card-img-top"
+                             style="height:300px; object-fit:cover;" />
+
+                        <div class="card-body d-flex flex-column">
+                            <small class="mb-2">@m.Title</small>
+
+                            <a href="/Movie/Details?imdbId=@m.imdbID"
+                               class="btn btn-warning btn-sm mt-auto">
+                                View Reviews
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+

@@ -1,0 +1,91 @@
+@model MovieReviewSystem.Models.ViewModels.MyReviewsPageVM
+@using Newtonsoft.Json
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div id="toast" class="alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3" role="alert" style="z-index:9999;">
+        <strong>✅ Success!</strong> @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+            const toast = document.getElementById('toast');
+            if (toast) {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+            }
+        }, 3000);
+    </script>
+}
+
+<h3>🤖 AI Recommendation</h3>
+<h1>
+Based on your reviews, you like  
+<h1>@Model.FavGenre</h1> movies 🎬
+</h1>
+
+
+
+<p>⭐ Average Rating: <b>@Model.Avg</b></p>
+<p>📝 Total Reviews: <b>@Model.Count</b></p>
+
+<hr />
+
+<canvas id="ratingChart" width="400" height="200"></canvas>
+
+<script>
+const ratingData = {
+    labels: @Html.Raw(JsonConvert.SerializeObject(
+        Model.RatingGraph.Select(r => r.Rating))),
+    datasets: [{
+        label: 'No. of Reviews',
+        data: @Html.Raw(JsonConvert.SerializeObject(
+            Model.RatingGraph.Select(r => r.Count)))
+    }]
+};
+
+new Chart(document.getElementById('ratingChart'), {
+    type: 'bar',
+    data: ratingData
+});
+</script>
+
+<hr />
+
+<h3 class="mb-4 text-danger fw-bold">🎬 My Reviews</h3>
+
+<div class="row">
+@foreach (var item in Model.Reviews)
+{
+    <div class="col-md-4 mb-4">
+        <div class="card bg-dark text-white h-100">
+
+            <img src="@item.Poster" class="card-img-top" />
+
+            <div class="card-body">
+                <h5>@item.Title</h5>
+
+                <p>
+                    @for (int i = 0; i < item.Review.Rating; i++)
+                    {
+                        <span style="color:gold">★</span>
+                    }
+                </p>
+
+                <p>@item.Review.Comment</p>
+
+                <a href="/Review/Edit?id=@item.Review.Id"
+                   class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+            </div>
+        </div>
+    </div>
+}
+</div>
+
+
+

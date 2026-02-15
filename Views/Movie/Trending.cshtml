@@ -1,0 +1,26 @@
+@model List<MovieReviewSystem.Models.OmdbMovieViewModel>
+
+<h3 class="text-danger fw-bold mb-4">🔥 Trending Movies</h3>
+
+<div class="row">
+@foreach (var m in Model)
+{
+    if (m.Poster != "N/A")
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card bg-dark text-white h-100">
+                <img src="@m.Poster" class="card-img-top">
+                <div class="card-body text-center">
+                    <h6>@m.Title</h6>
+                    <p>@m.Year</p>
+
+                    <a href="/Movie/Details?imdbId=@m.imdbID"
+                       class="btn btn-sm btn-outline-warning">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+}
+</div>
